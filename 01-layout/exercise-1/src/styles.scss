@@ -1,0 +1,65 @@
+@use 'sass:color';
+$base-color: #c80000;
+$font-color: #fff;
+
+@function darken-color($color, $amount) {
+    @return color.adjust($color, $lightness: -$amount);
+}
+
+@function lighten-color($color, $amount) {
+    @return color.adjust($color, $lightness: $amount);
+}
+
+@mixin color-variations {
+    .base-color {
+        background-color: $base-color;
+
+        .color-box-text {
+            color: $font-color;
+        }
+    }
+
+    @for $i from 1 through 4 {
+        .darken-#{$i} {
+            background-color: darken-color($base-color, $i * 5%);
+
+
+            .color-box-text {
+                color: darken-color($font-color, 20%)
+            }
+        }
+
+        .lighten-#{$i} {
+            background-color: lighten-color($base-color, $i * 5%);
+            opacity: 1 - ($i * 0.2);
+
+            .color-box-text {
+                color: lighten-color($font-color, 20%);
+            }
+        }
+    }
+}
+
+.container-1 {
+    @include color-variations;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .box {
+        display: flex;
+        width: 80px;
+        height: 100px;
+        margin: 5px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+
+    .base-color {
+        width: 100px;
+        height: 100px;
+    }
+}
