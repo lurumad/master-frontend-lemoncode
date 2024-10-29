@@ -1,0 +1,13 @@
+:root {
+    --base-color: #e88d8d;
+    --important-color: #bf4646;
+    --warning-color: #f45b69;
+    --color-background: #ffffff;
+    --border-radius: 0px;
+    --principal-font: 'Courier New', monospace;
+    --secondary-font: 'Verdana', sans-serif;
+    --box-shadow-offset-x: -10px;
+    --box-shadow-offset-y: 10px;
+    --box-shadow-blur-radius: 10px;
+    --box-shadow-color: rgba(0, 0, 0, 0.75);
+}
