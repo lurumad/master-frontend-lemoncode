@@ -1,0 +1,9 @@
+@use '_base' as *;
+
+.main {
+    @include palette();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,77 @@
+@use 'sass:color';
+@use 'sass:map';
+
+$base-colors: (
+    1: #c80000,
+    2: #00c800,
+    3: #0000c8
+);
+
+$font-color: #fff;
+
+@function darken-color($color, $amount) {
+    @return color.adjust($color, $lightness: -$amount);
+}
+
+@function lighten-color($color, $amount) {
+    @return color.adjust($color, $lightness: $amount);
+}
+
+@mixin color-variations($index) {
+    $base-color: map.get($base-colors, $index);
+
+    .base-color {
+        background-color: $base-color;
+
+        .color-box-text {
+            color: $font-color;
+        }
+    }
+
+    @for $i from 1 through 4 {
+        .darken-#{$i} {
+            background-color: darken-color($base-color, $i * 5%);
+
+
+            .color-box-text {
+                color: darken-color($font-color, 20%)
+            }
+        }
+
+        .lighten-#{$i} {
+            background-color: lighten-color($base-color, $i * 5%);
+            opacity: 1 - ($i * 0.2);
+
+            .color-box-text {
+                color: lighten-color($font-color, 20%);
+            }
+        }
+    }
+}
+
+@mixin palette() {
+    @for $i from 1 through 3 {
+        .container-#{$i} {
+            @include color-variations($i);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .box {
+                display: flex;
+                width: 80px;
+                height: 100px;
+                margin: 5px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+            }
+
+            .base-color {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}
