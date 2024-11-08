@@ -1,6 +1,6 @@
-# Module: Layout-01 Basic - Exercise: 1
+# Module: Layout-01 Basic - Exercise: 3
 
-Create a dynamic palette of colors using SASS.
+Menu responsive with Flexbox.
 
 ## Instructions
 
@@ -43,6 +43,10 @@ You can download the Remote - Containers extension from the following link: [Rem
 
 ## Result
 
-Your project should look like the following image:
+When you run for the first time, your project should look like the following image:
 
-![Result](./assets/result.png)
+![Result](./assets/menu1.png)
+
+For resolution 768px, your project should look like the following image:
+
+![Result](./assets/menu2.png)

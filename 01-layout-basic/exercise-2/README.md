@@ -1,6 +1,15 @@
-# Module: Layout-01 Basic - Exercise: 1
+# Module: Layout-01 Basic - Exercise: 2
 
-Create a dynamic palette of colors using SASS.
+Use two distinct themes using CSS variables to change the color, font, border radius, and box shadow of the elements.
+
+The theme changes affect the following features:
+
+- Color
+- Font
+- Border radius
+- Box shadow
+
+To visualize the changes, import one theme or the other in the main stylesheet file.
 
 ## Instructions
 
@@ -41,8 +50,12 @@ You can download the Remote - Containers extension from the following link: [Rem
 
 7. Follow the instructions in the README.md file to run the project
 
-## Result
+## Test
 
-Your project should look like the following image:
+When you run for the first time, your project should look like the following image:
 
-![Result](./assets/result.png)
+![Result](./assets/theme1.png)
+
+Go to `styles.css` and change the line `@import url('./color-theme-1.css');` to `@import url('./color-theme-2.css');` . Your project should look like the following image:
+
+![Result](./assets/theme2.png)
