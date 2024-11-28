@@ -3,11 +3,13 @@
       "lib": ["DOM", "DOM.Iterable", "ESNext"],
       "target": "ES5",
       "module": "ESNext",
-      // "moduleResolution": "node", // Use node resolution for "undici types" issue
+      "moduleResolution": "node", // Use node resolution for "undici types" issue
       "allowJs": true,
-      "outDir": "transpiled"
+      "outDir": "transpiled",
+      "esModuleInterop": true
     },
     "compileOnSave": true,
     "exclude": ["node_modules"],
-    "include": ["src"]
+    "include": ["src"],
+
   }
