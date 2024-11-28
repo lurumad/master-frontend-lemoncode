@@ -1,0 +1,13 @@
+const { isBookRead } = require("../src/read-books");
+
+test("checks if a book is read based on the title", () => {
+  const books = [
+    { title: "Harry Potter y la piedra filosofal", isRead: true },
+    { title: "Canción de hielo y fuego", isRead: false },
+    { title: "Devastación", isRead: true },
+  ];
+
+  expect(isBookRead(books, "devastación")).toBe(true);
+  expect(isBookRead(books, "Canción de hielo y fuego")).toBe(false);
+  expect(isBookRead(books, "Los Pilares de la Tierra")).toBe(false);
+});
