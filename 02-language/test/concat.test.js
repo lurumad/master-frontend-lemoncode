@@ -1,4 +1,4 @@
-const { concat, concatify } = require("../src/concat");
+const { concat, concatify } = require("../src/exercises/concat");
 
 test("concat of [1, 2] and [3, 4] is [1, 2, 3, 4]", () => {
   expect(concat([1, 2], [3, 4])).toEqual([1, 2, 3, 4]);

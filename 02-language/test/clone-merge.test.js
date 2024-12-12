@@ -1,4 +1,4 @@
-const { clone, merge } = require("../src/clone-merge");
+const { clone, merge } = require("../src/exercises/clone-merge");
 
 test("clone creates a new object with the same properties as the source object", () => {
   const source = {

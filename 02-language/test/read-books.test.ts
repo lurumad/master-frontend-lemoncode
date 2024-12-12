@@ -1,5 +1,5 @@
-import { isBookRead } from "../src/read-books"
-import type { Book } from "../src/read-books"
+import { isBookRead } from "../src/exercises/read-books"
+import type { Book } from "../src/exercises/read-books"
 import { expect, test } from "@jest/globals"
 
 test("checks if a book is read based on the title", () => {

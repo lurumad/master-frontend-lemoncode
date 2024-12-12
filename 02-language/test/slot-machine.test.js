@@ -1,4 +1,4 @@
-const { SlotMachine } = require("../src/slot-machine");
+const { SlotMachine } = require("../src/exercises/slot-machine");
 
 describe("Playing the slot machine", () => {
   test("returns a winning message if the spin is winning", () => {

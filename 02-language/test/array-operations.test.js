@@ -1,4 +1,4 @@
-const { head, tail, init, last } = require("../src/array-operations");
+const { head, tail, init, last } = require("../src/exercises/array-operations");
 
 test("head of [1, 2, 3] is 1", () => {
   expect(head([1, 2, 3])).toBe(1);
