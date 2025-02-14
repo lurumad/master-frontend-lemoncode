@@ -8,12 +8,12 @@ const queryClient = new QueryClient();
 
 export const App = () => {
   return (
-    <MockApiProvider>
-      <ListStateProvider>
-        <QueryClientProvider client={queryClient}>
-          <Router />
-        </QueryClientProvider>
-      </ListStateProvider>
-    </MockApiProvider>
+    // <MockApiProvider>
+    <ListStateProvider>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
+    </ListStateProvider>
+    // </MockApiProvider>
   );
 };

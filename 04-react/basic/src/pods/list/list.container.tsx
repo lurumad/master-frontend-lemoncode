@@ -116,8 +116,17 @@ export const ListContainer = () => {
                     src={member.avatar_url}
                     sx={{ width: 50, height: 50, mr: 2 }}
                   />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6">{member.login}</Typography>
+                  <CardContent sx={{ flexGrow: 1, overflow: "hidden" }}>
+                    <Typography
+                      noWrap
+                      sx={{
+                        textOverflow: "ellipsis",
+                        display: "block",
+                      }}
+                      variant="h6"
+                    >
+                      {member.login}
+                    </Typography>
                     <Typography variant="body2" color="text.secondary">
                       {member.id}
                     </Typography>
