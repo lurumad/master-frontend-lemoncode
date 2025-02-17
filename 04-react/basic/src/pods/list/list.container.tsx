@@ -1,20 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { GithubMemberApi, Member } from "./list.model";
-import {
-  Container,
-  Typography,
-  TextField,
-  Avatar,
-  Button,
-  Grid2,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Container, Typography, TextField, Button, Grid2 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useListState } from "@/core/list-state";
 import { Spinner } from "@/core/components";
+import { GithubMemberApi, Member } from "./list.model";
 import { Pagination } from "./pagination.component";
+import { MemberList } from "./list.component";
 
 interface GetMembersRequest {
   organization: string;
@@ -88,43 +79,7 @@ export const ListContainer = () => {
       {isLoading && <Spinner />}
       {!isLoading && !isError && (
         <>
-          <Grid2 container spacing={2} sx={{ mt: 2 }}>
-            {members.map((member, index) => (
-              <Grid2 component="div" size={{ xs: 12, md: 4 }} key={index}>
-                <Card
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    p: 2,
-                    borderRadius: 3,
-                    ":hover": { cursor: "pointer" },
-                  }}
-                  component={Link}
-                  to={`/detail/${member.id}`}
-                >
-                  <Avatar
-                    src={member.avatar_url}
-                    sx={{ width: 50, height: 50, mr: 2 }}
-                  />
-                  <CardContent sx={{ flexGrow: 1, overflow: "hidden" }}>
-                    <Typography
-                      noWrap
-                      sx={{
-                        textOverflow: "ellipsis",
-                        display: "block",
-                      }}
-                      variant="h6"
-                    >
-                      {member.login}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {member.id}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid2>
-            ))}
-          </Grid2>
+          <MemberList members={members} />
         </>
       )}
 
