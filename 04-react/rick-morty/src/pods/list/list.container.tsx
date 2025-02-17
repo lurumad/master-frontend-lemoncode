@@ -84,19 +84,21 @@ export const ListContainer = () => {
           </Grid2>
           <Grid2 container spacing={2} sx={{ mt: 2 }}>
             {response.results.map((character, index) => (
-              <Grid2 component="div" size={{ xs: 12, md: 4 }} key={index}>
+              <Grid2 component="div" size={{ xs: 12, md: 6 }} key={index}>
                 <Card
                   sx={{
+                    display: "flex",
+                    flexDirection: "row",
                     backgroundColor: "#282c34",
                     color: "white",
                   }}
                 >
+                  <CardMedia
+                    component="img"
+                    src={character.image}
+                    sx={{ objectFit: "cover", height: 200, width: 200 }}
+                  />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <CardMedia
-                      component="img"
-                      src={character.image}
-                      sx={{ objectFit: "cover" }}
-                    />
                     <Typography variant="h6" fontWeight="bold">
                       {character.name}
                     </Typography>
@@ -114,11 +116,9 @@ export const ListContainer = () => {
                       {character.location.name}
                     </Typography>
                     <Typography variant="body2" color="gray" mt={1}>
-                      First seen in:
+                      Gender:
                     </Typography>
-                    <Typography variant="body1">
-                      {character.origin.name}
-                    </Typography>
+                    <Typography variant="body1">{character.gender}</Typography>
                   </CardContent>
                 </Card>
               </Grid2>

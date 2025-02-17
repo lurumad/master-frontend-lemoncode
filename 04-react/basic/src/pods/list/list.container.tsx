@@ -7,14 +7,14 @@ import {
   Avatar,
   Button,
   Grid2,
-  CircularProgress,
-  Pagination,
   Card,
   CardContent,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useListState } from "@/core/list-state";
+import { Spinner } from "@/core/components";
+import { Pagination } from "./pagination.component";
 
 interface GetMembersRequest {
   organization: string;
@@ -85,17 +85,7 @@ export const ListContainer = () => {
         </Grid2>
       </Grid2>
 
-      {isLoading && (
-        <Container
-          maxWidth="sm"
-          style={{ marginTop: "2rem", textAlign: "center" }}
-        >
-          <CircularProgress />
-          <Typography variant="h6" sx={{ mt: 2 }}>
-            Loading...
-          </Typography>
-        </Container>
-      )}
+      {isLoading && <Spinner />}
       {!isLoading && !isError && (
         <>
           <Grid2 container spacing={2} sx={{ mt: 2 }}>
@@ -138,14 +128,11 @@ export const ListContainer = () => {
         </>
       )}
 
-      <Grid2 container spacing={2} sx={{ mt: 2 }} justifyContent="center">
-        <Pagination
-          count={listState.count}
-          color="primary"
-          onChange={onPaginationChange}
-          page={request.page}
-        />
-      </Grid2>
+      <Pagination
+        count={listState.count}
+        onChange={onPaginationChange}
+        page={request.page}
+      />
     </Container>
   );
 };
