@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { Container, Typography, TextField, Button, Grid2 } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useListState } from "@/core/list-state";
-import { Spinner } from "@/core/components";
+import { ErrorMessage, Spinner } from "@/core/components";
 import { GithubMemberApi, Member } from "./list.model";
 import { Pagination } from "./pagination.component";
 import { MemberList } from "./list.component";
+import { ListSearch } from "./list-search.component";
 
 interface GetMembersRequest {
   organization: string;
@@ -50,44 +51,24 @@ export const ListContainer = () => {
         Github Members of {listState.organization}
       </Typography>
 
-      <Grid2 container spacing={2} component="div">
-        <Grid2 component="div" size={{ xs: 12, md: 10 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="Search users"
-            sx={{ mb: 3 }}
-            size="small"
-            value={listState.organization}
-            onChange={(e) =>
-              setListState({ ...listState, organization: e.target.value })
-            }
-          />
-        </Grid2>
-        <Grid2 component="div">
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={onSearch}
-          >
-            Search
-          </Button>
-        </Grid2>
-      </Grid2>
+      <ListSearch
+        listState={listState}
+        setListState={setListState}
+        onSearch={onSearch}
+      />
 
       {isLoading && <Spinner />}
+      {isError && <ErrorMessage />}
       {!isLoading && !isError && (
         <>
           <MemberList members={members} />
+          <Pagination
+            count={listState.count}
+            onChange={onPaginationChange}
+            page={request.page}
+          />
         </>
       )}
-
-      <Pagination
-        count={listState.count}
-        onChange={onPaginationChange}
-        page={request.page}
-      />
     </Container>
   );
 };

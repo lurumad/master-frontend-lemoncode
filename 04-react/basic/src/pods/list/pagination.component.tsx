@@ -16,6 +16,8 @@ export const Pagination = (props: PaginationProps) => {
         color="primary"
         onChange={props.onChange}
         page={page}
+        showFirstButton
+        showLastButton
       />
     </Grid2>
   );

@@ -23,10 +23,12 @@ export const CartProvider: React.FC<CartProps> = ({ children }) => {
   const [cartItems, setCartItems] = React.useState<CartItem[]>([]);
 
   const updateCart = (item: CartItem) => {
+    console.log("cartItems", cartItems);
+    console.log("item", item);
     if (cartItems.some((i) => i.id === item.id)) {
       removeItem(item.id);
     } else {
-      setCartItems([...cartItems, item]);
+      setCartItems((items) => [...items, item]);
     }
   };
 

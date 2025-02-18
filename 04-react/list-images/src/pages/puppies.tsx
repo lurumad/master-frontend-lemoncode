@@ -1,7 +1,10 @@
+import { AppLayout } from "@/layouts";
+import { PuppiesContainer } from "@/pods/puppies";
+
 export const PuppiesPage = () => {
   return (
-    <>
-      <h1>Puppies</h1>
-    </>
+    <AppLayout>
+      <PuppiesContainer />
+    </AppLayout>
   );
 };

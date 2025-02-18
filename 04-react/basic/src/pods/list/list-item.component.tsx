@@ -18,6 +18,7 @@ export const MemberListItem = ({ member }: MemberListItemProps) => {
       }}
       component={Link}
       to={`/detail/${member.id}`}
+      data-testid="member-list-item"
     >
       <Avatar src={member.avatar_url} sx={{ width: 50, height: 50, mr: 2 }} />
       <CardContent sx={{ flexGrow: 1, overflow: "hidden" }}>
