@@ -1,1 +1,1 @@
-export * from "./list.model";
+export * from "./kitties.container";

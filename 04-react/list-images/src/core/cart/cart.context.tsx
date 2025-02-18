@@ -4,11 +4,17 @@ import { CartItem } from "./cart.model";
 interface CartProfile {
   cartItems: CartItem[];
   updateCart: (item: CartItem) => void;
+  emptyCart: () => void;
 }
 
 export const CartContext = React.createContext<CartProfile>({
   cartItems: [],
   updateCart: () => {
+    console.warn(
+      "** If you area reading this, likely you have forgotten to add the provider on top of your app"
+    );
+  },
+  emptyCart: () => {
     console.warn(
       "** If you area reading this, likely you have forgotten to add the provider on top of your app"
     );
@@ -32,12 +38,16 @@ export const CartProvider: React.FC<CartProps> = ({ children }) => {
     }
   };
 
+  const emptyCart = () => {
+    setCartItems([]);
+  };
+
   const removeItem = (id: string) => {
     setCartItems((items) => items.filter((item) => item.id !== id));
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, updateCart }}>
+    <CartContext.Provider value={{ cartItems, updateCart, emptyCart }}>
       {children}
     </CartContext.Provider>
   );

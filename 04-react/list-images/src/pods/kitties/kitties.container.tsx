@@ -1,3 +1,3 @@
-import { AnimalGrid } from "@/core/components/animal.component";
+import { AnimalGrid } from "@/core/components";
 
 export const KittiesContainer = () => <AnimalGrid type="kitties" />;

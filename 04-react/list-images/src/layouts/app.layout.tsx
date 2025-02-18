@@ -13,7 +13,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         {children}
       </Grid2>
       <Grid2 component="div" size={{ xs: 3 }}>
-        <Cart />
+        <Cart showButtons={true} />
       </Grid2>
     </Grid2>
   );

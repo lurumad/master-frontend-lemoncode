@@ -1,5 +1,5 @@
-import { KittiesContainer } from "@/pods/kitties/kitties.container";
-import { AppLayout } from "@/layouts/app.layout";
+import { KittiesContainer } from "@/pods/kitties";
+import { AppLayout } from "@/layouts";
 
 export const KittiesPage = () => {
   return (

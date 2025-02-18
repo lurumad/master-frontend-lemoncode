@@ -6,13 +6,20 @@ import {
   Grid2,
   CardMedia,
   Container,
+  Stack,
+  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartItem, useCart } from "../cart";
+import { Link } from "react-router-dom";
 
-export const Cart: React.FC = () => {
-  const { cartItems, updateCart } = useCart();
+interface CartProps {
+  showButtons: boolean;
+}
+
+export const Cart = ({ showButtons }: CartProps) => {
+  const { cartItems, updateCart, emptyCart } = useCart();
 
   const handleDelete = (item: CartItem) => {
     updateCart(item);
@@ -57,6 +64,27 @@ export const Cart: React.FC = () => {
           </IconButton>
         </Card>
       ))}
+
+      {showButtons && (
+        <Stack spacing={2} sx={{ mt: 2 }}>
+          <Button
+            variant="contained"
+            sx={{ background: "black" }}
+            component={Link}
+            to="/checkout"
+          >
+            Proceed to checkout
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ borderColor: "black", color: "black" }}
+            onClick={() => emptyCart()}
+          >
+            Empty cart
+          </Button>
+        </Stack>
+      )}
     </Container>
   );
 };
