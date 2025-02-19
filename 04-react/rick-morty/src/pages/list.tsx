@@ -1,4 +1,4 @@
-import { ListContainer } from "@/pods/list/list.container";
+import { ListContainer } from "@/pods/list";
 
 export const ListPage = () => {
   return (

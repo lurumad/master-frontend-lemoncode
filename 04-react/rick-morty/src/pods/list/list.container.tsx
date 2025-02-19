@@ -3,20 +3,16 @@ import { ApiResponse } from "./list.model";
 import {
   Container,
   Typography,
-  TextField,
-  Avatar,
-  Button,
   Grid2,
-  CircularProgress,
   Pagination,
   Card,
   CardContent,
-  CardMedia,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useDebounce } from "use-debounce";
-import { Margin } from "@mui/icons-material";
+import { ErrorMessage, Spinner } from "@/core/components";
+import { ListSearch } from "./list-search.component";
+import { CharacterList } from "./list.component";
 
 interface GetCharactersRequest {
   page: number;
@@ -43,35 +39,28 @@ export const ListContainer = () => {
         The Rick and Morty API
       </Typography>
 
-      <Grid2 container spacing={2} component="div">
-        <Grid2 component="div" size={{ xs: 12, md: 4 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="Search characters"
-            sx={{ mb: 3 }}
-            size="small"
-            defaultValue=""
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </Grid2>
-      </Grid2>
+      <ListSearch setName={setName} setPage={setPage} />
 
-      {isLoading && (
-        <Container
-          maxWidth="sm"
-          style={{ marginTop: "2rem", textAlign: "center" }}
-        >
-          <CircularProgress />
-          <Typography variant="h6" sx={{ mt: 2 }}>
-            Loading...
-          </Typography>
-        </Container>
-      )}
+      {isLoading && <Spinner />}
+      {isError && <ErrorMessage />}
       {!isLoading && !isError && (
         <>
+          {response.info.pages === 0 && (
+            <Card
+              sx={{
+                mt: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  No results found
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
           <Grid2 container spacing={2} sx={{ mt: 2 }} justifyContent="center">
             <Pagination
               count={response.info.pages}
@@ -82,48 +71,7 @@ export const ListContainer = () => {
               showLastButton
             />
           </Grid2>
-          <Grid2 container spacing={2} sx={{ mt: 2 }}>
-            {response.results.map((character, index) => (
-              <Grid2 component="div" size={{ xs: 12, md: 6 }} key={index}>
-                <Card
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    backgroundColor: "#282c34",
-                    color: "white",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    src={character.image}
-                    sx={{ objectFit: "cover", height: 200, width: 200 }}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" fontWeight="bold">
-                      {character.name}
-                    </Typography>
-                    <Typography
-                      color={
-                        character.status === "Alive" ? "lightgreen" : "red"
-                      }
-                    >
-                      {character.status} - {character.species}
-                    </Typography>
-                    <Typography variant="body2" color="gray">
-                      Last known location:
-                    </Typography>
-                    <Typography variant="body1">
-                      {character.location.name}
-                    </Typography>
-                    <Typography variant="body2" color="gray" mt={1}>
-                      Gender:
-                    </Typography>
-                    <Typography variant="body1">{character.gender}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid2>
-            ))}
-          </Grid2>
+          <CharacterList characters={response.results} />
         </>
       )}
     </Container>
@@ -137,6 +85,10 @@ const useGetCharacters = ({ page, name }: GetCharactersRequest) => {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character?page=${page}&name=${name}`
       );
+
+      if (response.status === 404) {
+        return { info: { pages: 0 }, results: [] };
+      }
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

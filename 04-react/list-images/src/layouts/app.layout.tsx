@@ -1,4 +1,4 @@
-import { Cart } from "@/core/components/cart.component";
+import { Cart } from "@/core/components";
 import { Grid2 } from "@mui/material";
 import React from "react";
 

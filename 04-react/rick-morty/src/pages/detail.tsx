@@ -1,4 +1,4 @@
-import { DetailContainer } from "@/pods/detail/detail.container";
+import { DetailContainer } from "@/pods/detail";
 import { useParams } from "react-router-dom";
 
 export const DetailPage = () => {

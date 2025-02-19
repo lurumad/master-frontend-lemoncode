@@ -1,4 +1,4 @@
-import { Cart } from "@/core/components/cart.component";
+import { Cart } from "@/core/components";
 import {
   Button,
   Card,
