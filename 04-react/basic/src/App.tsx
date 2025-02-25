@@ -8,21 +8,11 @@ const queryClient = new QueryClient();
 export const App = () => {
   return (
     <>
-      {import.meta.env.DEV ? (
-        <MockApiProvider>
-          <ListStateProvider>
-            <QueryClientProvider client={queryClient}>
-              <Router />
-            </QueryClientProvider>
-          </ListStateProvider>
-        </MockApiProvider>
-      ) : (
-        <ListStateProvider>
-          <QueryClientProvider client={queryClient}>
-            <Router />
-          </QueryClientProvider>
-        </ListStateProvider>
-      )}
+      <ListStateProvider>
+        <QueryClientProvider client={queryClient}>
+          <Router />
+        </QueryClientProvider>
+      </ListStateProvider>
     </>
   );
 };
