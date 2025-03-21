@@ -45,3 +45,4 @@ yarn.lock
 dist
 
 transpiled
+.qodo
