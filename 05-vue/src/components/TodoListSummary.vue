@@ -3,11 +3,13 @@ import { Status, type Todo } from "@/model/domain";
 import { computed } from "vue";
 import { useQueryClient, useMutation } from "@tanstack/vue-query";
 import TodoListSummaryButton from "./TodoListSummaryButton.vue";
+import { useToast } from "@/composables/useToast";
 
 const props = defineProps<{
   todos: Todo[];
 }>();
 
+const { toast } = useToast();
 const queryClient = useQueryClient();
 
 const pendingTodos = computed(
@@ -53,6 +55,9 @@ const clearCompletedMutation = useMutation({
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ["todos"] });
   },
+  onError: () => {
+    toast("Failed to clear completed todos");
+  },
 });
 
 const markAllCompletedMutation = useMutation({
@@ -60,12 +65,18 @@ const markAllCompletedMutation = useMutation({
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ["todos"] });
   },
+  onError: () => {
+    toast("Failed to mark all todos as completed");
+  },
 });
 
 const markAllPendingMutation = useMutation({
   mutationFn: markAllPending,
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ["todos"] });
+  },
+  onError: () => {
+    toast("Failed to mark all todos as pending");
   },
 });
 

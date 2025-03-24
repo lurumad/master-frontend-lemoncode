@@ -31,7 +31,6 @@ let todos: Todo[] = [
 
 export const handlers = [
   http.get("https://api.todos.com", async ({ request }) => {
-    return new Response(null, { status: 500 });
     if (process.env.NODE_ENV !== "test") {
       await delay(500);
     }

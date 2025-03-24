@@ -1,44 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useQueryClient, useMutation } from '@tanstack/vue-query'
+import { ref } from "vue";
+import { useQueryClient, useMutation } from "@tanstack/vue-query";
+import { useToast } from "@/composables/useToast";
 
-const queryClient = useQueryClient()
+const queryClient = useQueryClient();
+const { toast } = useToast();
 
 const addTodoMutation = async () => {
-  if (!todoInput.value.trim()) return null
-  const response = await fetch('https://api.todos.com', {
-    method: 'POST',
+  if (!todoInput.value.trim()) return null;
+  const response = await fetch("https://api.todos.com", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       text: todoInput.value,
     }),
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to add todo')
+    throw new Error("Failed to add todo");
   }
-}
+};
 
 const mutation = useMutation({
   mutationFn: addTodoMutation,
   onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['todos'] })
+    queryClient.invalidateQueries({ queryKey: ["todos"] });
   },
-})
+  onError: (error) => {
+    toast("Failed to add todo");
+  },
+});
 
 const addTodo = async () => {
-  await mutation.mutateAsync()
-  todoInput.value = ''
-}
+  await mutation.mutateAsync();
+  todoInput.value = "";
+};
 
-const todoInput = ref('')
+const todoInput = ref("");
 </script>
 
 <template>
   <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
-    <form id="todo-form" class="flex items-center gap-2" @submit.prevent="addTodo">
+    <form
+      id="todo-form"
+      class="flex items-center gap-2"
+      @submit.prevent="addTodo"
+    >
       <input
         type="text"
         id="new-todo"
